@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmación de Reserva</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f8fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      background-color: #fff;
+      margin: 20px auto;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .header {
+      background-color: #1e88e5;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .content {
+      padding: 20px;
+    }
+    .content h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #1e88e5;
+    }
+    .info {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .info td {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+    }
+    .info td.label {
+      font-weight: bold;
+      background-color: #f1f1f1;
+      width: 40%;
+    }
+    .footer {
+      background-color: #f1f1f1;
+      padding: 15px;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+    }
+    .content-img {
+      display: flex;
+      justify-content: center;
+    }
+    @media (max-width: 600px) {
+      .content, .header, .footer {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Confirmación de Reserva {{puertoOrigen}} a {{puertoDestino}}</h1>
+    </div>
+    <div class="content">
+      <h2>Detalles de la Reserva</h2>
+      <table class="info">
+        <tr>
+          <td class="label">Nombre Completo</td>
+          <td>{{nombreCompleto}}</td>
+        </tr>
+        <tr>
+          <td class="label">Correo</td>
+          <td>{{correo}}</td>
+        </tr>
+        <tr>
+          <td class="label">Teléfono</td>
+          <td>{{telefono}}</td>
+        </tr>
+        <tr>
+          <td class="label">Documento</td>
+          <td>{{documentoIdentidad}}</td>
+        </tr>
+        <tr>
+          <td class="label">Fecha de Reserva</td>
+          <td>{{fechaReserva}}</td>
+        </tr>
+        <tr>
+          <td class="label">Hora de Reserva</td>
+          <td>{{horaReserva}}</td>
+        </tr>
+        <tr>
+          <td class="label">Cantidad de Personas</td>
+          <td>{{cantidadPersonas}}</td>
+        </tr>
+      </table>
+    </div>
+    {{#if showUrl}}
+      <div style="background-color: #f9f9f9; padding: 20px; margin: 20px; border-radius: 8px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.05);">
+        <h2 style="color: #1e88e5; margin-bottom: 15px;">Volante de Pago</h2>
+        <img src="{{volantePagoUrl}}" alt="Volante de Pago" style="max-width: 100%; height: auto; border-radius: 6px; border: 1px solid #ddd;"/>
+      </div>
+    {{/if}}
+      <div style="background-color: #fff3cd; padding: 20px; margin: 20px; border-radius: 8px; text-align: center; border: 1px solid #ffeeba;">
+        <h2 style="color: #856404; margin-bottom: 10px;">⚠ No se ha adjuntado un volante de pago</h2>
+        <p style="font-size: 14px; color: #856404;">
+          <b><i>RECUERDE QUE PARA ASEGURAR SU RESERVA, ES REQUERIDO EL PAGO ANTICIPADO.
+          DE LO CONTRARIO, SU RESERVA PODRÍA SER REEMPLAZADA</i></b>
+        </p>
+        <div style="background-color: #f9f9f9; padding: 20px; margin: 20px; border-radius: 8px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.05);">
+          <a href="https://checkout.wompi.co/l/test_VPOS_lkhodq" style="color: #1e88e5;">Si el qr no funciona, ingresa a este link</a>
+          <img src="../../public/qr-bancolombia.png" alt="Volante de Pago" style="max-width: 100%; height: auto; border-radius: 6px; border: 1px solid #ddd;"/>
+        </div>
+      </div>
+    <div class="footer">
+      Gracias por reservar con nosotros. ¡Te esperamos!
+    </div>
+  </div>
+</body>
+</html>
