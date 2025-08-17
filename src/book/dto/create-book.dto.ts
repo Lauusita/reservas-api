@@ -56,4 +56,8 @@ export class CreateBookDto {
 
   @IsEnum(Puerto, { message: 'El puerto debe ser uno de los siguientes: PUERTO_NARINO, CABALLO_COCHA, VEINTE_DE_JULIO.' } )
   puertoDestino: PuertoType;
+
+  @IsOptional()
+  @IsDate()
+  creadoEn?: Date;
 }

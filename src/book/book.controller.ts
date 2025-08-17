@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, HttpStatus, ParseFilePipeBuilder, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, HttpStatus, ParseFilePipeBuilder, BadRequestException, Query, Res, Response } from '@nestjs/common'
+import { HttpService } from '@nestjs/axios';;
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
@@ -16,20 +17,38 @@ const fileConfig = new ParseFilePipeBuilder()
 
 @Controller('reserva')
 export class BookController {
-  constructor(private readonly bookService: BookService) {}
+  constructor(
+    private readonly bookService: BookService,
+    
+  ) {}
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))
-  create(
+  createBookingWithoutPayment(
     @Body(BookValidationPipe) createBookDto: CreateBookDto,
     @UploadedFile(fileConfig) file: Express.Multer.File
     ) {
     // if (!file) throw new BadRequestException('El archivo es requerido y no fue adjuntado.');
-    
-    return this.bookService.create(
+    return this.bookService.createWithoutPayment(
       createBookDto, 
       file
     );
+  }
+
+  @Post("payment")
+  createBooking(
+    @Body(BookValidationPipe) createBookDto: CreateBookDto
+    ) {
+      console.log(createBookDto);
+      
+      return this.bookService.createPaymentRequest(
+        createBookDto
+      );
+  }
+
+  @Get('payment/response')
+  async obtenerRespuesta(@Query('id') transactionId: string) {
+    return this.bookService.getTransaction(transactionId);
   }
 
   @Get()

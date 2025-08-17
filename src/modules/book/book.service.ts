@@ -14,8 +14,7 @@ export class BookDBService {
       return await this.prisma.reserva.create({
         data: {
           ...createBookDto,
-          volantePagoUrl: createBookDto.volantePagoUrl || null,
-          creadoEn: new Date()
+          volantePagoUrl: createBookDto.volantePagoUrl || null
         },
       });
     } catch (error) {

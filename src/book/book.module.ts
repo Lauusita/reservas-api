@@ -5,9 +5,11 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { BookDBService } from 'src/modules/book/book.service';
 import { SupabaseClient } from 'src/supabase/supabase.client.ts';
 import { MailService } from 'src/email/email.service';
+import { HttpModule, HttpService } from '@nestjs/axios';
 
 @Module({
   controllers: [BookController],
   providers: [ PrismaService, BookService, BookDBService, SupabaseClient, MailService ],
+  imports: [ HttpModule ]
 })
 export class BookModule {}

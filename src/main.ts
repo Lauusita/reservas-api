@@ -7,11 +7,11 @@ async function bootstrap() {
   
   app.useGlobalPipes(new ValidationPipe({ 
     whitelist: true, 
-    forbidNonWhitelisted: true,
+    forbidNonWhitelisted: true, 
     transform: true
   }));
   app.setGlobalPrefix('api');
-  app.enableCors()
+  app.enableCors(["https://taqsas.co", "http://localhost:5173"])
   
   await app.listen(process.env.PORT ?? 3000); 
 }
